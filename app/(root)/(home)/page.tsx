@@ -12,7 +12,7 @@ const Page = () => {
         </div>
         <SearchForm />
       </section>
-      
+
       <Filters />
     </main>
   );
