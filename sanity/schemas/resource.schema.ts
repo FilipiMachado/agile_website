@@ -33,6 +33,20 @@ const schema = {
       title: "Poster",
       type: "image",
       validation: (Rule: any) => Rule.required(),
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: "category",
+      title: "Category",
+      type: "string",
+      validation: (Rule: any) => Rule.required(),
+      options: {
+        list: ["frontend", "backend", "next 13", "fullstack", "other"],
+      },
     },
   ],
 };
+
+export default schema;
