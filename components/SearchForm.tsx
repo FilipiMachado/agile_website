@@ -1,12 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 
 const SearchForm = () => {
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      console.log(search);
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [search]);
 
   return (
     <form className="flex-center mx-auto mt-10 w-full sm:mt-10 sm:px-5">
