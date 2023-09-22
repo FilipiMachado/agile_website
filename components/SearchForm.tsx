@@ -5,12 +5,34 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 
+import { formUrlQuery } from "@/sanity/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 const SearchForm = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const patname = usePathname();
+
   const [search, setSearch] = useState("");
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      console.log(search);
+      let newUrl = "";
+
+      if (search) {
+        newUrl = formUrlQuery({
+          params: useSearchParams.toString(),
+          key: "query",
+          value: search,
+        });
+      } else {
+        newUrl = formUrlQuery({
+          params: useSearchParams.toString(),
+          keysToRemove: ["query"],
+        });
+      }
+
+      router.push(newUrl, { scroll: false });
     }, 500);
 
     return () => clearTimeout(delayDebounceFn);

@@ -1,4 +1,4 @@
-import qs from 'query-string'
+import qs from "query-string";
 
 interface BuildQueryParams {
   type: string;
@@ -37,19 +37,24 @@ interface UrlQueryParams {
   keysToRemove?: string[];
 }
 
-export function formUrlQuery({ params, key, value, keysToRemove }: UrlQueryParams) {
+export function formUrlQuery({
+  params,
+  key,
+  value,
+  keysToRemove,
+}: UrlQueryParams) {
   const currentUrl = qs.parse(params);
 
-  if(keysToRemove) {
+  if (keysToRemove) {
     keysToRemove.forEach((keyToRemove) => {
       delete currentUrl[keyToRemove];
-    })
-  } else if(key && value) {
+    });
+  } else if (key && value) {
     currentUrl[key] = value;
   }
 
   return qs.stringifyUrl(
     { url: window.location.pathname, query: currentUrl },
     { skipNull: true }
-  )
+  );
 }
